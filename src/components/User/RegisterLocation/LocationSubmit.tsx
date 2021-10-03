@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { RoundButton } from "components/Common/Buttons";
+import { LocationResult } from "./types";
 import { TSelectItem } from "util/types";
 import { ROUTE, TARGET_COUNT } from "util/constants";
 
 interface submitProps {
-  searchLogs: string[];
+  searchLogs: LocationResult[];
   interests: TSelectItem[];
 }
 function LocationSubmit({ searchLogs, interests }: submitProps) {

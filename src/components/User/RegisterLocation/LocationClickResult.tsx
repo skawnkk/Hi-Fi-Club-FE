@@ -2,29 +2,30 @@ import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { getLocationName } from "../RegisterLocation";
 import { RoundButton, TargetButton } from "components/Common/Buttons";
-
+import { LocationResult } from "./types";
 interface LocationClickResultProps {
   isSameDong: boolean;
-  searchLogs: string[];
-  setSearchLogs: Dispatch<SetStateAction<string[]>>;
+  _searchLogs: LocationResult[];
+  _setSearchLogs: Dispatch<SetStateAction<LocationResult[]>>;
 }
-export default function LocationClickResult({ isSameDong, searchLogs, setSearchLogs }: LocationClickResultProps) {
-  const handleDeleteTarget = (location: string) => () => {
-    setSearchLogs((prev: string[]) => prev.filter((target) => target !== location));
+export default function LocationClickResult({ isSameDong, _searchLogs, _setSearchLogs }: LocationClickResultProps) {
+  const handleDeleteTarget = (log: LocationResult) => () => {
+    _setSearchLogs((prev) => prev.filter((target) => target !== log));
   };
 
   return (
     <LocationBox>
       <ButtonBox>
-        {searchLogs.map((location, idx) => {
+        {_searchLogs.map((log, idx) => {
+          const location = log.address_name;
           const { cityName, dongName } = getLocationName(location);
           return !isSameDong ? (
-            <TargetButton key={idx} displayName={dongName} onDeleteItemClick={handleDeleteTarget(location)} />
+            <TargetButton key={idx} displayName={dongName} onDeleteItemClick={handleDeleteTarget(log)} />
           ) : (
             <TargetButton
               key={idx}
               displayName={cityName + " " + dongName}
-              onDeleteItemClick={handleDeleteTarget(location)}
+              onDeleteItemClick={handleDeleteTarget(log)}
             />
           );
         })}

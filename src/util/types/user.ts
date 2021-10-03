@@ -32,4 +32,4 @@ type TInterestDetailProp = {
   name: string;
 };
 
-export type { TSelectItem, TSelectedInfo, TInterestSelectProps, TInterestInfo, TInterestDetailProp  };
+export type { TSelectItem, TSelectedInfo, TInterestSelectProps, TInterestInfo, TInterestDetailProp };

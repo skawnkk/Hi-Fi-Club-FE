@@ -21,7 +21,7 @@ const RegisterLocationPage = (props: any) => {
   //props타입질문드립니다. console.log(props);
   const interests = props.location.state;
   const [locationResult, setLocationResult] = useState<LocationResult[]>([]);
-  const [searchLogs, setSearchLogs] = useState<string[]>([]);
+  const [_searchLogs, _setSearchLogs] = useState<LocationResult[]>([]);
   const [isSameDong, setSameDong] = useState<boolean>(false);
 
   return (
@@ -33,9 +33,17 @@ const RegisterLocationPage = (props: any) => {
         </LocationBox>
 
         <LocationInput setLocationResult={setLocationResult} />
-        <LocationSearchResult {...{ locationResult, setLocationResult, searchLogs, setSearchLogs, setSameDong }} />
-        <LocationClickResult {...{ isSameDong, searchLogs, setSearchLogs }} />
-        <LocationSubmit searchLogs={searchLogs} interests={interests} />
+        <LocationSearchResult
+          {...{
+            _searchLogs,
+            _setSearchLogs,
+            locationResult,
+            setLocationResult,
+            setSameDong,
+          }}
+        />
+        <LocationClickResult {...{ isSameDong, _searchLogs, _setSearchLogs }} />
+        <LocationSubmit searchLogs={_searchLogs} interests={interests} />
       </LocationRow>
     </RegisterLocationLayout>
   );

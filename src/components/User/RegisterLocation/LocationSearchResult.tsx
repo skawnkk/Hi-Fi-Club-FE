@@ -3,35 +3,38 @@ import styled from "styled-components";
 import { getLocationName } from "../RegisterLocation";
 import { LocationResult } from "./types";
 interface locationResultProps {
+  _searchLogs: LocationResult[];
   locationResult: LocationResult[];
+  _setSearchLogs: Dispatch<SetStateAction<LocationResult[]>>;
   setLocationResult: Dispatch<SetStateAction<LocationResult[]>>;
-  searchLogs: string[];
-  setSearchLogs: Dispatch<SetStateAction<string[]>>;
+
   setSameDong: Dispatch<SetStateAction<boolean>>;
 }
 
 function LocationSearchResult({
+  _searchLogs,
+  _setSearchLogs,
   locationResult,
   setLocationResult,
-  searchLogs,
-  setSearchLogs,
+
   setSameDong,
 }: locationResultProps) {
   const [countGuide, setCountGuide] = useState(false);
-  const isAlreadyClicked = (region: string) => {
-    return !!searchLogs.includes(region);
+  const isAlreadyClicked = (location: LocationResult) => {
+    return !!_searchLogs.includes(location);
   };
 
   const isFullClicked = () => {
-    return searchLogs.length > 1;
+    return _searchLogs.length > 1;
   };
 
   const isSameDongName = (region: string) => {
-    return searchLogs.filter((log) => new RegExp(getLocationName(region).dongName).test(log)).length > 0;
+    return _searchLogs.filter((log) => new RegExp(getLocationName(region).dongName).test(log.address_name)).length > 0;
   };
 
-  const handleTargetLocation = (region: string) => {
-    if (isAlreadyClicked(region)) return;
+  const handleTargetLocation = (location: LocationResult) => {
+    const region = location.address_name;
+    if (isAlreadyClicked(location)) return;
 
     if (isFullClicked()) {
       setCountGuide(true);
@@ -41,7 +44,7 @@ function LocationSearchResult({
 
     setSameDong(isSameDongName(region));
     setCountGuide(false);
-    setSearchLogs((prev) => prev.concat([region]));
+    _setSearchLogs((prev) => prev.concat([location]));
   };
 
   return (
@@ -52,10 +55,7 @@ function LocationSearchResult({
           <span>찾으시는 동네가 어디신가요?</span>
           <ul>
             {locationResult.map((location, idx) => (
-              <li
-                key={idx}
-                onClick={() => handleTargetLocation(location?.address_name)}
-              >{`•  ${location?.address_name}`}</li>
+              <li key={idx} onClick={() => handleTargetLocation(location)}>{`•  ${location?.address_name}`}</li>
             ))}
           </ul>
         </>
