@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { RoundButton } from "components/Common/Buttons";
-import { LocationResult } from "./types";
-import { TSelectItem } from "util/types";
+import { submitProps } from "util/types/user";
 import { ROUTE, TARGET_COUNT } from "util/constants";
+import { postUserInfo } from "util/dataFetching/userInfo";
 
-interface submitProps {
-  searchLogs: LocationResult[];
-  interests: TSelectItem[];
-}
 function LocationSubmit({ searchLogs, interests }: submitProps) {
   const history = useHistory();
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
     if (searchLogs.length !== TARGET_COUNT) return;
-
-    //서버에 post요청보내기
-    //응답코드 200일때,
-    history.push(ROUTE.MAIN);
+    const response = await postUserInfo({ searchLogs, interests });
+    if (response === 200) history.push(ROUTE.MAIN); //200이 아닌경우에 대한 에러처리
   };
   return (
     <NextButton onClick={handleNextPage} variant="outlined">

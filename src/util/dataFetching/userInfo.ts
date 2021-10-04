@@ -1,5 +1,5 @@
 import API from "util/dataFetching/API";
-
+import { submitProps } from "util/types/user";
 export const getUsesrInfo = async () => {
   //jwt토큰으로 회원정보만 받을 수 있는 api ?
 };
@@ -41,19 +41,20 @@ export const getDetailInterests = async (mainId: number) => {
   }
 };
 
-export const postUserInterests = async () => {
+export const postUserInfo = async ({ searchLogs, interests }: submitProps) => {
   try {
     const token = localStorage.getItem("jwt");
-    const header = {
+    const param = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify({ searchLogs, interests }),
     };
-    const response = await fetch(API.USERINFO.SUBMIT(), header);
+    const response = await fetch(API.USERINFO.SUBMIT(), param);
     if (response.status !== 200) throw Error;
-    return response.json(); //응답형태 백엔드와 정하기
+    return response.status; //응답형태 백엔드와 정하기
   } catch (err) {
     console.log(err); //에러처리 제대로하기
     return [];
