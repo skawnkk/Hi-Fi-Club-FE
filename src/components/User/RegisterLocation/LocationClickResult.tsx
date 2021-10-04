@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { getLocationName } from "../RegisterLocation";
+import { getLocationName } from "util/funcs";
 import { RoundButton, TargetButton } from "components/Common/Buttons";
 import { LocationResult } from "./types";
 interface LocationClickResultProps {

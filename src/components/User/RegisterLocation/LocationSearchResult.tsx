@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { getLocationName } from "../RegisterLocation";
+import { getLocationName } from "util/funcs";
 import { LocationResult } from "./types";
 interface locationResultProps {
   _searchLogs: LocationResult[];
