@@ -1,20 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import useInput from "@/hooks/useInput";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import API from "util/dataFetching/API";
-type Address = {
-  [key: string]: string;
-};
-interface LocationResult {
-  address: Address;
-  address_name: string;
-  address_type: string;
-  road_address: null;
-  x: string;
-  y: string;
-}
-
+import { LocationResult } from "util/types/user";
 interface LocationInputProps {
   setLocationResult: Dispatch<SetStateAction<LocationResult[]>>;
 }
