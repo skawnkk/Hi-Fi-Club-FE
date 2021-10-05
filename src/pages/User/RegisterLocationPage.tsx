@@ -7,17 +7,15 @@ import {
   LocationClickResult,
   LocationSubmit,
 } from "components/User/RegisterLocation";
-import { LocationResult } from "components/User/RegisterLocation/types";
-import { TSelectItem } from "util/types/user";
+import { TSelectItem, LocationResult } from "util/types/user";
 interface location {
-  pathname: string;
   state: TSelectItem[];
-  search: string;
-  hash: string;
-  key: string;
+
+  [key: string]: string | TSelectItem[];
 }
 
 const RegisterLocationPage = (props: any) => {
+  //! 카카오 로그인 정보 없다면 잘못된 접근 알림 후(로그인해주세요) 메인페이지 리다이렉팅
   //props타입질문드립니다. console.log(props);
   const interests = props.location.state;
   const [locationResult, setLocationResult] = useState<LocationResult[]>([]);

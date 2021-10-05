@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { getLocationName } from "util/funcs";
 import { RoundButton, TargetButton } from "components/Common/Buttons";
-import { LocationResult } from "./types";
+import { getLocationName } from "util/funcs";
+import { LocationResult } from "util/types/user";
 interface LocationClickResultProps {
   isSameDong: boolean;
   _searchLogs: LocationResult[];

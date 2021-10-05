@@ -32,15 +32,13 @@ type TInterestDetailProp = {
   name: string;
 };
 
-interface submitProps {
-  searchLogs: LocationResult[];
-  interests: TSelectItem[];
-}
+//location
 
 type Address = {
   [key: string]: string;
 };
-export interface LocationResult {
+
+interface LocationResult {
   address: Address;
   address_name: string;
   address_type: string;
@@ -49,4 +47,17 @@ export interface LocationResult {
   y: string;
 }
 
-export type { TSelectItem, TSelectedInfo, TInterestSelectProps, TInterestInfo, TInterestDetailProp, submitProps };
+type submitProps = {
+  searchLogs: LocationResult[];
+  interests: TSelectItem[];
+};
+
+export type {
+  TSelectItem,
+  TSelectedInfo,
+  TInterestSelectProps,
+  TInterestInfo,
+  TInterestDetailProp,
+  submitProps,
+  LocationResult,
+};
